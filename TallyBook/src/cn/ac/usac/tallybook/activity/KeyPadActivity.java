@@ -1,6 +1,7 @@
 package cn.ac.usac.tallybook.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -79,10 +80,10 @@ public class KeyPadActivity extends Activity implements OnClickListener {
 		btnCancel.setOnClickListener(this);
 		btnClean.setOnClickListener(this);
 		btnDone.setOnClickListener(this);
-		if(this.getIntent().hasExtra("value"))
-		{
-			value=this.getIntent().getStringExtra("value");
-		}
+//		if(this.getIntent().hasExtra("value"))
+//		{
+//			value=this.getIntent().getStringExtra("value");
+//		}
 		if(value==null || value.equals(""))
 		{
 			value="0";
@@ -92,14 +93,12 @@ public class KeyPadActivity extends Activity implements OnClickListener {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.view.View.OnClickListener#onClick(android.view.View)
-	 */
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
+		
+		//数据是使用Intent返回
+        Intent intent = new Intent();
+        
 		switch (v.getId()) {
 		case R.id.display:
 			break;
@@ -118,12 +117,8 @@ public class KeyPadActivity extends Activity implements OnClickListener {
 			value = "0";
 			break;
 		case R.id.done:
-			/*
-			 * Bundle bundle = new Bundle(); bundle.putString("value", value);
-			 * SendSMSActivity.this.setResult(RESULT_CANCELED,
-			 * SendSMSActivity.this.getIntent().putExtras(bundle
-			 */
-			this.setResult(RESULT_OK, this.getIntent().putExtra("value", value));
+//			this.setResult(RESULT_OK, this.getIntent().putExtra("value", value));
+			this.setResult(RESULT_OK, intent.putExtra("value", value));
 			this.finish();
 			break;
 		default:
@@ -151,16 +146,12 @@ public class KeyPadActivity extends Activity implements OnClickListener {
 					value = value + ((Button) v).getText();
 				}
 			}
-			
 			break;
 		}
-//		DecimalFormat df2 = new DecimalFormat("#####,##0.##"); 
 		if(value.indexOf(".")>-1 && value.indexOf(".")<value.length()-3)
 		{
 			value=value.substring(0,value.indexOf(".")+3);
 		}
-		//value=df2.format(Double.parseDouble(value));
-		btnDisplay.setText(value);//₩
-
+		btnDisplay.setText(value);
 	}
 }

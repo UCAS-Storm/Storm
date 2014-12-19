@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout android:orientation="vertical" android:background="@drawable/main_bg" android:layout_width="fill_parent" android:layout_height="fill_parent" style="@style/common_bg"
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:batteryView="http://schemas.android.com/apk/res/com.mymoney">
+  xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout android:orientation="horizontal" android:paddingLeft="12.0px" android:paddingTop="27.0px" android:layout_width="fill_parent" android:layout_height="wrap_content">
         <LinearLayout android:orientation="vertical" android:id="@+id/month_expense_ly" android:focusable="true" android:clickable="true" android:layout_width="307.0px" android:layout_height="240.0px">
             <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="60.0px" android:layout_marginTop="6.0px">
@@ -39,8 +38,8 @@
         <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
             <TextView android:id="@+id/add_expense_tv" android:visibility="gone" android:text="@string/nav_add_expense" style="@style/nav_text_hdpi" />
             <TextView android:id="@+id/nav_report_tv" android:text="@string/nav_report" android:visibility="gone" style="@style/nav_text_hdpi" />
-            <TextView android:id="@+id/nav_account_tv" android:text="@string/nav_record" style="@style/nav_text_hdpi" />
-            <TextView android:id="@+id/nav_budget_tv" android:text="@string/nav_statistics" style="@style/nav_text_hdpi" />
+            <TextView android:id="@+id/nav_flow" android:text="@string/nav_flow" style="@style/nav_text_hdpi" />
+            <TextView android:id="@+id/nav_statistics" android:text="@string/nav_statistics" style="@style/nav_text_hdpi" />
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>

@@ -18,7 +18,7 @@
 		<activity android:name=".AddOrEditExpenseActivity"
 			android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
         <activity android:name=".KeyPadActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
-		
+		<activity android:name=".NavStatisticsActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
 		
 		<!--  
 		<activity android:name=".NavExpenseActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />

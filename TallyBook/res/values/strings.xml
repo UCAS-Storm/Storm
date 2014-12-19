@@ -40,7 +40,7 @@
     <string name="nav_report">报表</string>
     <string name="nav_planning">计划</string>
     <string name="nav_statistics">统计</string>
-    <string name="nav_record">明细</string>
+    <string name="nav_flow">流水</string>
     <string name="search">搜索</string>
     <string name="take_pic">拍照</string>
     <string name="sync_or_not">是否同步</string>
