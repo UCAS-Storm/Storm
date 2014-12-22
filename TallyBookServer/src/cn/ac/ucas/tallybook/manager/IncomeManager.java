@@ -1,12 +1,13 @@
 package cn.ac.ucas.tallybook.manager;
 
+import java.util.List;
+
 import cn.ac.ucas.tallybook.model.Income;
-import cn.ac.ucas.tallybook.util.PageModel;
 
 public interface IncomeManager {
 	
-	public PageModel findAllIncomes(int pageNo, int pageSize,
-			String tenantID, String queryStr, String target); 
+	public List findAllIncomes(int pageNo, int pageSize,
+			String tenantID, String startTime, String endTime); 
 	
 	public Income findIncomeByID(int incomeID);
 	
@@ -15,4 +16,6 @@ public interface IncomeManager {
 	public void upadteIncome(Income income);
 	
 	public void deleteIncome(int incomeID);
+	
+	public String findCategoryNameByID(int categoryID);
 }
