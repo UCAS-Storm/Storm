@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/common_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:id="@+id/main_ly"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/title_tv"
+            style="@style/common_title"
+            android:layout_width="match_parent"
+            android:text="记账"
+            android:visibility="gone" />
+
+        <RadioGroup
+            android:id="@+id/trans_type_tab_rg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/payout_tab_rb"
+                android:layout_width="160.0dip"
+                android:layout_height="46.0dip"
+                android:background="@drawable/widget_btn_radio_label_background"
+                android:button="@drawable/payout_tab_btn_radio"
+                android:text="支出" />
+
+            <RadioButton
+                android:id="@+id/income_tab_rb"
+                android:layout_width="160.0dip"
+                android:layout_height="46.0dip"
+                android:background="@drawable/widget_btn_radio_label_background"
+                android:button="@drawable/income_tab_btn_radio"
+                android:text="收入" />
+        </RadioGroup>
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="307.0dip"
+                    android:layout_height="85.0dip"
+                    android:layout_marginLeft="6.0dip"
+                    android:background="@drawable/expense_cameral_money_display_bg"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:id="@+id/cost_btn"
+                        android:layout_width="275.0dip"
+                        android:layout_height="52.0dip"
+                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginTop="15.0dip"
+                        android:background="@drawable/expense_cost_btn"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="right|center"
+                        android:hint="输入金额"
+                        android:paddingRight="10.0dip"
+                        android:textColor="@color/cost_text"
+                        android:textColorHint="@color/white"
+                        android:textSize="25.0dip"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <FrameLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50.0dip" >
+
+                        <Spinner
+                            android:id="@+id/category_spn"
+                            style="@style/form_row_input_top"
+                            android:paddingRight="150.0dip"
+                            android:prompt="@string/spn_prompt_category" />
+
+                        <TextView
+                            style="@style/form_row_label"
+                            android:text="类别"
+                            android:textColor="@color/white" />
+
+                        <RelativeLayout
+                            android:id="@+id/budget_balance_rl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/budget_balance_tv"
+                                style="@style/budget_balance_tips_for_addexpense"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_below="@+id/budget_status_lbv"
+                                android:layout_marginBottom="1.0dip"
+                                android:layout_marginRight="60.0dip"
+                                android:layout_marginTop="5.0dip"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+
+                        <ImageView style="@style/form_row_go_detail" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        style="@style/form_row_input_middle"
+                        android:orientation="horizontal"
+                        android:paddingLeft="0.0dip"
+                        android:paddingRight="0.0dip" >
+
+                        <FrameLayout
+                            android:id="@+id/trade_time_fl"
+                            android:layout_width="fill_parent"
+                       		android:layout_height="50.0dip">
+
+                           <TextView
+                            style="@style/form_row_label"
+                            android:text="时间"
+                            android:textColor="@color/white" />
+                            <Button
+                                android:id="@+id/trade_time_btn"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:background="@drawable/form_row_input_middle_short_left"
+                               style="@style/form_row_input_middle"
+                                android:textColor="@color/white" />
+                            <ImageView style="@style/form_row_go_detail" />
+                        </FrameLayout>
+					<!--  
+                        <ImageView
+                            android:layout_width="1.0dip"
+                            android:layout_height="38.0dip"
+                            android:layout_gravity="center"
+                            android:background="@drawable/form_row_input_divider" />
+                        <FrameLayout
+                            android:id="@+id/project_spn_fl"
+                            android:layout_width="159.0dip"
+                            android:layout_height="fill_parent" >
+
+                            <Spinner
+                                android:id="@+id/project_spn"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:background="@drawable/form_row_input_middle_short_right"
+                                android:gravity="right|center"
+                                android:paddingLeft="20.0dip"
+                                android:prompt="@string/spn_prompt_project"
+                                android:textColor="@color/white"
+                                android:textColorHint="@color/white" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="110.0dip"
+                                android:background="@drawable/go_detail" />
+                        </FrameLayout>
+                        -->
+                    </LinearLayout>
+                   
+                    <FrameLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" >
+
+                        <Button
+                            android:id="@+id/note_btn"
+                            style="@style/form_row_input_middle"
+                            android:paddingLeft="90.0dip"
+                            android:paddingRight="45.0dip"
+                            android:singleLine="true" />
+
+                        <TextView
+                            style="@style/form_row_label"
+                            android:text="备注"
+                            android:textColor="@color/white" />
+
+                        <ImageView style="@style/form_row_go_detail" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/empty_fl"
+                        style="@style/form_row_input_middle"
+                        android:visibility="gone" />
+
+                    <RelativeLayout
+                        style="@style/form_row_layout_middle"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/form_row_layout_bottom" >
+
+                        <Button
+                            android:id="@+id/save_btn"
+                            style="@style/common_toolbar_btn_for_addexpense"
+                            android:layout_width="115.0dip"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="39.0dip"
+                            android:text="@string/save" />
+
+                        <Button
+                            android:id="@+id/cancel_btn"
+                            style="@style/common_toolbar_btn_for_addexpense"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="30.0dip"
+                            android:text="@string/cancel" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</FrameLayout>
