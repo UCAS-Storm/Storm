@@ -6,11 +6,13 @@ public class PageModel {
 
 	private List data;
 	
-	//��ҳ��
+	//总记录数
 	private int total;
 	
+	//当前页数
 	private int pageNo;
 	
+	//总页数
 	private int pageSize;
 	
 	public int getTopPage() {

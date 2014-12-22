@@ -20,12 +20,12 @@ public class IncomeManagerImpl implements IncomeManager {
 		
 		StringBuffer sb = new StringBuffer();
 		
-//		sql���
+//		sql语句：查询当前用户在一段时间内的收入记录
 //		SELECT i.CategoryID, i.Money, i.ExpenseTime, i.Note FROM Income i 
 //		WHERE TenantID = 'liubei' AND ExpenseTime >= '2014-12-21' AND ExpenseTime <= '2014-12-22'
 //		ORDER BY IncomeID ASC LIMIT 0, 2;
 		
-//		sb.append(str)
+//		sb.append("SELECT i.CategoryID, i.Money, i.ExpenseTime, i.Note FROM Income i")
 		
 		
 		return null;
