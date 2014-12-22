@@ -1,9 +1,5 @@
 package cn.ac.ucas.tallybook.manager.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
 import cn.ac.ucas.tallybook.manager.IncomeManager;
 import cn.ac.ucas.tallybook.model.Income;
 import cn.ac.ucas.tallybook.util.PageModel;
