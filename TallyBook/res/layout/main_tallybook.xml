@@ -15,8 +15,8 @@
             </LinearLayout>
             <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="55.0px">
                 <TextView android:text="支出总额:" style="@style/main_money_label_hdpi" android:textColor = "@color/white"/>
-                <TextView android:id="@+id/expense_amount_tv" style="@style/main_money_hdpi" android:textColor="@color/white"/>
-            </LinearLayout>
+                <TextView android:id="@+id/payOut_amount_tv" style="@style/main_money_hdpi" android:textColor="@color/white"/>
+            </LinearLayout> 
         </LinearLayout>
     </LinearLayout>
     <Button android:background="@drawable/common_transparence" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" />
@@ -35,6 +35,20 @@
             <Button android:id="@+id/nav_budget_btn" android:background="@drawable/main_budget_btn"  style="@style/nav_btn_hdpi"  android:layout_marginLeft="115px"/>
             <Button android:id="@+id/nav_setting_btn" android:background="@drawable/main_setting_btn" style="@style/nav_btn_hdpi" android:visibility="gone"/>
         </LinearLayout>
+        <!-- 当前日期(今天的)所有收支记录 -->
+        <LinearLayout  
+		    android:orientation="vertical"  
+		    android:layout_width="fill_parent"  
+		    android:layout_height="fill_parent"  
+		    android:paddingLeft="3dp"  
+		    android:paddingRight="3dp"> 
+	        <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+	        <ImageView android:id="@+id/lv_empty_iv" android:visibility="gone" style="@style/common_lv_empty_for_expense" />
+	        <ListView android:id="@+id/expense_lv" android:layout_width="fill_parent" android:layout_height="fill_parent" style="@style/Widget.ListView" />
+	        <TextView android:id="@+id/listview_loading_tv" style="@style/common_lv_loading_tv" />
+	   		</FrameLayout> 
+		</LinearLayout>
+		<!-- 当前日期(今天的)所有收支记录 -->
         <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
             <TextView android:id="@+id/add_expense_tv" android:visibility="gone" android:text="@string/nav_add_expense" style="@style/nav_text_hdpi" />
             <TextView android:id="@+id/nav_report_tv" android:text="@string/nav_report" android:visibility="gone" style="@style/nav_text_hdpi" />

@@ -29,7 +29,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.ac.ucas.tallybook.utility.GeneralInfo;
+import cn.ac.ucas.tallybook.util.GeneralInfo;
 
 /**
  * 记一笔or编辑
@@ -108,7 +108,7 @@ public class AddOrEditExpenseActivity extends Activity implements OnClickListene
 		
 		//类别
 		category_spn = (Spinner)findViewById(R.id.category_spn);
-		//此处list的值应该从数据库读出
+		//此处list的值可以从数据库读出
 		list = Arrays.asList(new String[] { "餐饮", "娱乐", "购物", "交通", "工资", "其他"});
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -270,5 +270,4 @@ public class AddOrEditExpenseActivity extends Activity implements OnClickListene
             this.finish();  
 		}
 	}
-	
 }

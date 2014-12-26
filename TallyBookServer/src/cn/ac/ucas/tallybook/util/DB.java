@@ -16,7 +16,7 @@ public class DB {
 			Configuration config = new Configuration("configure.properties");
 			DB_PATH = config.getValue("DB_PATH");
 			DB_USER = config.getValue("DB_USER");
-			DB_PASSWD = config.getValue("DB_PASSED");
+			DB_PASSWD = config.getValue("DB_PASSWD");
 			
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
@@ -64,4 +64,3 @@ public class DB {
 			}
 		}
 }
-

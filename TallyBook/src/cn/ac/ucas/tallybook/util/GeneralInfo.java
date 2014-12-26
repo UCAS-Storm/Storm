@@ -1,4 +1,4 @@
-package cn.ac.ucas.tallybook.utility;
+package cn.ac.ucas.tallybook.util;
 
 import java.util.Calendar;
 
