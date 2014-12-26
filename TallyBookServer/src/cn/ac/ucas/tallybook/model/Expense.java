@@ -2,13 +2,21 @@ package cn.ac.ucas.tallybook.model;
 
 import java.util.Date;
 
-public class PayOut {
+public class Expense {
 
-	private int payOutID;
+	private int expenseID;
 	
 	private String tenantID;
 	
+	/**
+	 * type表示花费类别是收入还是支出
+	 * type: 1=收入，2=支出
+	 */
+	private int type;
+	
 	private int categoryID;
+	
+	private String categoryName;
 	
 	private Date expenseTime;
 	
@@ -16,12 +24,12 @@ public class PayOut {
 	
 	private String note;
 
-	public int getPayOutID() {
-		return payOutID;
+	public int getExpenseID() {
+		return expenseID;
 	}
 
-	public void setPayOutID(int payOutID) {
-		this.payOutID = payOutID;
+	public void setExpenseID(int expenseID) {
+		this.expenseID = expenseID;
 	}
 
 	public String getTenantID() {
@@ -32,12 +40,28 @@ public class PayOut {
 		this.tenantID = tenantID;
 	}
 
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
 	public int getCategoryID() {
 		return categoryID;
 	}
 
 	public void setCategoryID(int categoryID) {
 		this.categoryID = categoryID;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public Date getExpenseTime() {

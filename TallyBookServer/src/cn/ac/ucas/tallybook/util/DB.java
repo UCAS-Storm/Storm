@@ -19,7 +19,7 @@ public class DB {
 		public static Connection getConnection() {
 			Connection conn = null;
 			try {
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TallyBook?user=root&password=root123");
+				conn = DriverManager.getConnection("jdbc:mysql://124.16.103.100:3306/TallyBook?user=root&password=root123");
 
 			} catch (SQLException e) {
 				e.printStackTrace();
