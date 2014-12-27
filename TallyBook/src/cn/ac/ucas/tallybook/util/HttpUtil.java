@@ -17,9 +17,11 @@ import org.apache.http.util.EntityUtils;
 
 public class HttpUtil {
 
+	private static Configuration config = new Configuration("configure.properties");
 	// 创建HttpClient对象
 	public static HttpClient httpClient = new DefaultHttpClient();
-	public static final String BASE_URL = "http://124.16.103.100:8080/TallyBookServer/servlet/";
+	public static final String BASE_URL = config.getValue("BASE_URL");
+//	public static final String BASE_URL = "http://124.16.103.100:8080/TallyBookServer/servlet/";
 	/**
 	 * 
 	 * @param url 发送请求的URL

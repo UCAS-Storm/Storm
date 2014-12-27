@@ -1,4 +1,4 @@
-package cn.ac.usac.tallybook.activity;
+package cn.ac.ucas.tallybook.activity;
 
 import android.app.Activity;
 import android.content.Context;

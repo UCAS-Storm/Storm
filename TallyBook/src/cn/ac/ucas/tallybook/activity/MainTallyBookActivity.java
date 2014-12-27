@@ -1,14 +1,10 @@
-package cn.ac.usac.tallybook.activity;
+package cn.ac.ucas.tallybook.activity;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
-import cn.ac.ucas.tallybook.util.GeneralInfo;
-import cn.ac.ucas.tallybook.util.HttpUtil;
-import cn.ac.ucas.tallybook.util.IncomeArrayAdapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,9 +16,12 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+import cn.ac.ucas.tallybook.util.DialogUtil;
+import cn.ac.ucas.tallybook.util.GeneralInfo;
+import cn.ac.ucas.tallybook.util.HttpUtil;
+import cn.ac.ucas.tallybook.util.IncomeArrayAdapter;
 
 public class MainTallyBookActivity extends Activity implements OnClickListener, OnScrollListener {
 
@@ -91,6 +90,7 @@ public class MainTallyBookActivity extends Activity implements OnClickListener, 
 			intent = new Intent(context, AddOrEditExpenseActivity.class);
 			intent.putExtra("type", GeneralInfo.getPayoutMode());
 			startActivity(intent);
+			finish();
 		}
 		
 		//统计
@@ -107,6 +107,7 @@ public class MainTallyBookActivity extends Activity implements OnClickListener, 
 		map.put("target", "loadMainInfo");
 		// 定义发送请求的URL
 		String url = HttpUtil.BASE_URL + "LoadInfoServlet";
+		
 		JSONArray jsonArray = null;
 		// 发送请求
 		 try {
@@ -123,7 +124,7 @@ public class MainTallyBookActivity extends Activity implements OnClickListener, 
 				if(expenseArray != null) {
 					expense_lv.setAdapter(new IncomeArrayAdapter(expenseArray, context));
 				}
-				listview_loading_tv.setVisibility(View.GONE);
+				listview_loading_tv.setVisibility(View.VISIBLE);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
