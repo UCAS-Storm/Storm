@@ -1,4 +1,4 @@
-package cn.ac.usac.tallybook.activity;
+package cn.ac.ucas.tallybook.activity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,11 +45,17 @@ public class MainActivity extends Activity implements OnClickListener {
 		if (view == signin_btn) {
 			String tenantID = tenantID_edit.getText().toString().trim();
 			String password = password_edit.getText().toString().trim();
-			if(login(tenantID, password) == 1) {
+			int lgn = login(tenantID, password);
+			
+			//开发调试暂用*****
+			lgn = 1;
+			//************
+			
+			if(lgn == 1) {
 				intent = new Intent(context, MainTallyBookActivity.class);
 				startActivity(intent);
 				finish();
-			} else if(login(tenantID, password) == 2) {
+			} else if(lgn == 2) {
 				DialogUtil.showDialog(context, "账号或密码错误，请重新输入！", false);
 			} else {
 				DialogUtil.showDialog(context, "服务器响应异常，请稍后再试！", false);
