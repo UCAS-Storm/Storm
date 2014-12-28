@@ -17,11 +17,9 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import cn.ac.ucas.tallybook.util.DialogUtil;
+import cn.ac.ucas.tallybook.util.ExpenseArrayAdapter;
 import cn.ac.ucas.tallybook.util.GeneralInfo;
 import cn.ac.ucas.tallybook.util.HttpUtil;
-import cn.ac.ucas.tallybook.util.IncomeArrayAdapter;
 
 public class MainTallyBookActivity extends Activity implements OnClickListener, OnScrollListener {
 
@@ -122,7 +120,7 @@ public class MainTallyBookActivity extends Activity implements OnClickListener, 
 				//当前日期的所有收入或支出记录
 				JSONArray expenseArray = jsonArray.getJSONArray(2);
 				if(expenseArray != null) {
-					expense_lv.setAdapter(new IncomeArrayAdapter(expenseArray, context));
+					expense_lv.setAdapter(new ExpenseArrayAdapter(expenseArray, context));
 				}
 				listview_loading_tv.setVisibility(View.VISIBLE);
 			}
