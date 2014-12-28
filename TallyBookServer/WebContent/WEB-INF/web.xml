@@ -18,4 +18,22 @@
     <servlet-name>LoadInfoServlet</servlet-name>
     <url-pattern>/servlet/LoadInfoServlet</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SaveExpenseServlet</servlet-name>
+    <servlet-class>cn.ac.ucas.tallybook.servlet.SaveExpenseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SaveExpenseServlet</servlet-name>
+    <url-pattern>/servlet/SaveExpenseServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>LoadStatServlet</servlet-name>
+    <servlet-class>cn.ac.ucas.tallybook.servlet.LoadStatServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadStatServlet</servlet-name>
+    <url-pattern>/servlet/LoadStatServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
