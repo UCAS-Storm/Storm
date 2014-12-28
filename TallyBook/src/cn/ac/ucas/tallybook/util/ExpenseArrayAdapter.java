@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import cn.ac.usac.tallybook.activity.R;
+import cn.ac.ucas.tallybook.activity.R;
 
 public class ExpenseArrayAdapter extends BaseAdapter {
 
