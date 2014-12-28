@@ -12,13 +12,14 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import cn.ac.usac.tallybook.activity.R;
 
-public class IncomeArrayAdapter extends BaseAdapter {
+public class ExpenseArrayAdapter extends BaseAdapter {
 
 	// 需要包装的JSONArray
 	private JSONArray incomeArray;
+	
 	private Context context;
 	
-	public IncomeArrayAdapter(JSONArray incomeArray, Context context)
+	public ExpenseArrayAdapter(JSONArray incomeArray, Context context)
 	{
 		this.incomeArray = incomeArray;
 		this.context = context;
@@ -74,7 +75,11 @@ public class IncomeArrayAdapter extends BaseAdapter {
 		return view;
 	}
 	
-	public void addItem() {
-		
+	/**
+	 * 添加列表项
+	 * @param jsonArray
+	 */
+	public void loadMore(JSONArray jsonArray) {
+		incomeArray.put(jsonArray);
 	}
 }

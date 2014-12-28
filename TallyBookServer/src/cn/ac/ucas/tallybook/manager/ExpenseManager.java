@@ -10,7 +10,7 @@ public interface ExpenseManager {
 	public List<Expense> findAllExpenses(int pageNo, int pageSize,
 			String tenantID, String startTime, String endTime); 
 	
-	public List<Expense> findExpenses(String tenantID);
+	public List<Expense> findExpenses(int pageNo, int pageSize, String tenantID);
 	
 	public Expense findExpenseByID(int expenseID);
 	

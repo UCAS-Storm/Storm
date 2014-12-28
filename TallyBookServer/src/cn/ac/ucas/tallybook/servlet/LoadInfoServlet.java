@@ -26,8 +26,8 @@ public class LoadInfoServlet extends HttpServlet {
 		res.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html; charset=UTF-8");
 		String target = req.getParameter("target");
-//		String tenantID = (String) req.getSession().getAttribute("tenantID");
-		String tenantID = "liubei";
+		String tenantID = (String) req.getSession().getAttribute("tenantID");
+//		String tenantID = "liubei";
 		
 		if(tenantID != null && !"".equals(tenantID)) {
 			
@@ -36,8 +36,8 @@ public class LoadInfoServlet extends HttpServlet {
 			 */
 			if("loadMainInfo".equals(target)) {
 				
-//				int pageNo = Integer.parseInt(req.getParameter("pageNo"));
-//				int pageSize = 2;
+				int pageNo = Integer.parseInt(req.getParameter("pageNo"));
+				int pageSize = Integer.parseInt(req.getParameter("pageSize"));
 				
 				ExpenseManager expenseManager = ExpenseManagerImpl.getInstance();
 				//收入
@@ -45,7 +45,7 @@ public class LoadInfoServlet extends HttpServlet {
 				 //支出
 				double psumAll = expenseManager.sumAll(tenantID, 2);
 				//花费记录
-				List expenses = expenseManager.findExpenses(tenantID);
+				List expenses = expenseManager.findExpenses(pageNo, pageSize, tenantID);
 				List data = new ArrayList();
 				data.add(0, isumAll);
 				data.add(1, psumAll);
