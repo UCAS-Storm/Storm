@@ -45,10 +45,10 @@ public class MainActivity extends Activity implements OnClickListener {
 		if (view == signin_btn) {
 			String tenantID = tenantID_edit.getText().toString().trim();
 			String password = password_edit.getText().toString().trim();
-			int lgn = login(tenantID, password);
+//			int lgn = login(tenantID, password);
 			
 			//开发调试暂用*****
-			lgn = 1;
+			int lgn = 1;
 			//************
 			
 			if(lgn == 1) {

@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,6 +32,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.ac.ucas.tallybook.util.GeneralInfo;
+import cn.ac.ucas.tallybook.util.HttpUtil;
 
 /**
  * 记一笔or编辑
@@ -233,7 +236,20 @@ public class AddOrEditExpenseActivity extends Activity implements OnClickListene
 			Toast.LENGTH_SHORT).show();
 			return;
 		}
+		// 使用Map封装请求参数
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("target", "saveExpenseInfo");
 		
+		//获取数据(TenantID, Type, CategoryID, Money, ExpenseTime, Note)
+//		map.put("Type",);
+				
+		// 定义发送请求的URL
+		String url = HttpUtil.BASE_URL + "SaveExpenseServlet";
+		try {
+			HttpUtil.postRequest(url, map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		
 		exit();
