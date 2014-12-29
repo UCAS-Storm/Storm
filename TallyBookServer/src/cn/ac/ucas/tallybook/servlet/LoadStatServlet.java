@@ -29,11 +29,11 @@ public class LoadStatServlet extends HttpServlet{
 //		String tenantID = (String) req.getSession().getAttribute("tenantID");
 		String tenantID = "liubei";
 		
-//		String starTime = req.getParameter("startTime");
-//		String endTime = req.getParameter("endTime");
+		String starTime = req.getParameter("startTime");
+		String endTime = req.getParameter("endTime");
 		
-		String starTime = "2008-08-08";
-		String endTime = "2014-12-31";
+//		String starTime = "2008-08-08";
+//		String endTime = "2014-12-31";
 		if(tenantID != null && !"".equals(tenantID)) {
 			
 			/**
