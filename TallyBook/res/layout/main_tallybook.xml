@@ -7,7 +7,7 @@
                 <!--  
                 <TextView android:textSize="25.0dip" android:textStyle="bold" android:id="@+id/month_tv" android:layout_marginLeft="35.0px" style="@style/main_budget_lable_hdpi" />
                 -->
-                <TextView android:paddingBottom="5.0px" android:layout_marginLeft="4.0px" android:text="全部统计:" style="@style/main_budget_lable_hdpi" />
+                <TextView android:paddingBottom="5.0px" android:layout_marginLeft="1.0px" android:text="全部统计:" style="@style/main_budget_lable_hdpi" />
             </LinearLayout>
             <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="50.0px">
                 <TextView android:text="收入总额:" style="@style/main_money_label_hdpi" android:textColor = "@color/white" />
@@ -42,8 +42,6 @@
 		    android:layout_height="fill_parent"  
 		    android:paddingLeft="3dp"  
 		    android:paddingRight="3dp"> 
-		    <TextView android:text="@string/today_expense_two" android:textSize="15sp" android:paddingLeft="15.0px" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textColor = "@color/white" />
-		    <TextView android:id="@+id/hava_no_expense_tv" android:visibility="gone" android:text="您今天还没记录呢，快来添加吧。" android:textSize="15sp" android:paddingLeft="15.0px" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textColor = "@color/black" />
 	        <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
 	        <ImageView android:id="@+id/lv_empty_iv" android:visibility="gone" style="@style/common_lv_empty_for_expense" />
 	        <ListView android:id="@+id/expense_lv" android:layout_width="fill_parent" android:layout_height="fill_parent" style="@style/Widget.ListView" android:fastScrollEnabled="true" />
