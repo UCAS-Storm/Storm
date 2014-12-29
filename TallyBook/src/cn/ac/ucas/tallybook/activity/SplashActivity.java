@@ -14,9 +14,9 @@ private Context context = SplashActivity.this;
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
 		
-		// 显示30秒后进入到系统主界面
+		// 显示3秒后进入到系统主界面
 		Handler handler = new Handler();
-		handler.postDelayed(new StartMainThread(),300);
+		handler.postDelayed(new StartMainThread(),3000);
 	}
 	
 	class StartMainThread implements Runnable {
