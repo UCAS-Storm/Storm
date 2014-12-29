@@ -121,6 +121,7 @@ public class NavStatisticsActivity extends Activity implements OnClickListener{
 		show_pay_btn = (Button) findViewById(R.id.show_pay_btn);
 		show_pay_btn.setOnClickListener(this);
 		
+		fetchData();
 	}
 	
 	@Override
@@ -140,63 +141,7 @@ public class NavStatisticsActivity extends Activity implements OnClickListener{
 		
 		//查询事件监听
 		if(view == query_btn){
-			//清除先前数据
-			incomeData.clear();
-			payoutData.clear();
-			
-			
-			//判断所设置时间是否有效
-			String startTime = start_time_btn.getText().toString().trim();
-			String endTime = end_time_btn.getText().toString().trim();
-			if (BaseFormat.String2Date(startTime).after(BaseFormat.String2Date(endTime))) {
-				DialogUtil.showDialog(context, "日期设置不正确，请重新输入！", false);
-				return;
-			}
-			
-			// 使用Map封装请求参数
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("target", "loadStatInfo");
-			map.put("startTime", startTime);
-			map.put("endTime", endTime);
-			
-			// 定义发送请求的URL
-			String url = HttpUtil.BASE_URL + "LoadStatServlet";
-			
-			JSONArray jsonArray = null;
-			// 发送请求
-			 try {
-				jsonArray = new JSONArray(HttpUtil.postRequest(url, map));
-				if(jsonArray != null) {
-					incomeSum = jsonArray.getInt(0);
-					payoutSum = jsonArray.getInt(1);
-					String isumAllStr = String.format("￥%.2f", incomeSum);
-					income_sum_tv.setText(isumAllStr);
-					String psumAllStr = String.format("￥%.2f", payoutSum);
-					payout_sum_tv.setText(psumAllStr);
-					//获取收入分类数据
-					JSONArray incomeArray = jsonArray.getJSONArray(2);
-					if(incomeArray != null) {
-						for (int i = 0; i < incomeArray.length(); i++) {
-							JSONObject jsonObject = incomeArray.optJSONObject(i);
-							String name = jsonObject.getString("categoryName");
-							double count = jsonObject.getDouble("count");
-							incomeData.put(name, count);
-						}
-					}
-					//获取支出分类数据
-					JSONArray payourArray = jsonArray.getJSONArray(3);
-					if(payourArray != null) {
-						for (int i = 0; i < payourArray.length(); i++) {
-							JSONObject jsonObject = payourArray.optJSONObject(i);
-							String name = jsonObject.getString("categoryName");
-							double count = jsonObject.getDouble("count");
-							payoutData.put(name, count);
-						}
-					}
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			fetchData();
 		}
 		
 		if (view == show_in_btn) {
@@ -207,6 +152,66 @@ public class NavStatisticsActivity extends Activity implements OnClickListener{
 		if (view == show_pay_btn) {
 			//显示支出饼图
 			showPieChart(2, payoutData);
+		}
+	}
+	
+	private void fetchData() {
+		//清除先前数据
+		incomeData.clear();
+		payoutData.clear();
+		
+		
+		//判断所设置时间是否有效
+		String startTime = start_time_btn.getText().toString().trim();
+		String endTime = end_time_btn.getText().toString().trim();
+		if (BaseFormat.String2Date(startTime).after(BaseFormat.String2Date(endTime))) {
+			DialogUtil.showDialog(context, "日期设置不正确，请重新输入！", false);
+			return;
+		}
+		
+		// 使用Map封装请求参数
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("target", "loadStatInfo");
+		map.put("startTime", startTime);
+		map.put("endTime", endTime);
+		
+		// 定义发送请求的URL
+		String url = HttpUtil.BASE_URL + "LoadStatServlet";
+		
+		JSONArray jsonArray = null;
+		// 发送请求
+		 try {
+			jsonArray = new JSONArray(HttpUtil.postRequest(url, map));
+			if(jsonArray != null) {
+				incomeSum = jsonArray.getInt(0);
+				payoutSum = jsonArray.getInt(1);
+				String isumAllStr = String.format("￥%.2f", incomeSum);
+				income_sum_tv.setText(isumAllStr);
+				String psumAllStr = String.format("￥%.2f", payoutSum);
+				payout_sum_tv.setText(psumAllStr);
+				//获取收入分类数据
+				JSONArray incomeArray = jsonArray.getJSONArray(2);
+				if(incomeArray != null) {
+					for (int i = 0; i < incomeArray.length(); i++) {
+						JSONObject jsonObject = incomeArray.optJSONObject(i);
+						String name = jsonObject.getString("categoryName");
+						double count = jsonObject.getDouble("count");
+						incomeData.put(name, count);
+					}
+				}
+				//获取支出分类数据
+				JSONArray payourArray = jsonArray.getJSONArray(3);
+				if(payourArray != null) {
+					for (int i = 0; i < payourArray.length(); i++) {
+						JSONObject jsonObject = payourArray.optJSONObject(i);
+						String name = jsonObject.getString("categoryName");
+						double count = jsonObject.getDouble("count");
+						payoutData.put(name, count);
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	

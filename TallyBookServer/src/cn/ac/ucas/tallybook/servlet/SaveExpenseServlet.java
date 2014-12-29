@@ -48,18 +48,6 @@ public class SaveExpenseServlet extends HttpServlet{
 				ExpenseManager expenseManager = ExpenseManagerImpl.getInstance();
 				expenseManager.addExpense(expense);		
 				
-//				//收入
-//				double isumAll = expenseManager.sumAll(tenantID, 1);
-//				 //支出
-//				double psumAll = expenseManager.sumAll(tenantID, 2);
-//				//花费记录
-//				List expenses = expenseManager.findExpenses(tenantID);
-//				List data = new ArrayList();
-//				data.add(0, isumAll);
-//				data.add(1, psumAll);
-//				data.add(2, expenses);
-//				JSONArray jsonArray = new JSONArray(data);
-//				res.getWriter().println(jsonArray);
 			}
 		}
 	}
