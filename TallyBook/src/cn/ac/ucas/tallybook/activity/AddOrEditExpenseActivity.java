@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -45,6 +46,7 @@ public class AddOrEditExpenseActivity extends Activity implements OnClickListene
 	
 
 	private int type = GeneralInfo.getPayoutMode();
+	private int lgn = 1;
 	
 	private TextView title_tv = null;
 	private RadioGroup trans_type_tab_rg = null;
@@ -82,6 +84,7 @@ public class AddOrEditExpenseActivity extends Activity implements OnClickListene
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_or_edit_expense_activity);
+		lgn = getIntent().getIntExtra("lgn", lgn);
 		loadingFormation();
 	}
 
@@ -281,6 +284,7 @@ public class AddOrEditExpenseActivity extends Activity implements OnClickListene
 	private void exit(){
 		if(type != GeneralInfo.getEditMode()){
 			Intent intent = new Intent(context, MainTallyBookActivity.class);
+			intent.putExtra("lgn", lgn);
 			startActivity(intent);
 			finish();
 		}else{

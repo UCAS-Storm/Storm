@@ -93,6 +93,7 @@ public class MainTallyBookActivity extends Activity implements OnClickListener, 
 		if (view == add_expense_quickly_btn) {
 			intent = new Intent(context, AddOrEditExpenseActivity.class);
 			intent.putExtra("type", GeneralInfo.getPayoutMode());
+			intent.putExtra("lgn", 2);
 			startActivity(intent);
 			finish();
 		}
