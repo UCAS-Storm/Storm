@@ -91,7 +91,7 @@ public class ExpenseManagerImpl implements ExpenseManager {
 		
 		sb.append("SELECT ExpenseID, Type, CategoryID, Money, ExpenseTime, Note FROM Expense ")
 			.append(" WHERE TenantID = ? AND ExpenseTime = CURRENT_DATE() ")
-			.append(" ORDER BY ExpenseTime DESC LIMIT ?,?");
+			.append(" ORDER BY ExpenseID DESC LIMIT ?,?");
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

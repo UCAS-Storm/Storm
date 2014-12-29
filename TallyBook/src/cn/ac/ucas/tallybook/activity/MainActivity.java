@@ -43,6 +43,16 @@ public class MainActivity extends Activity implements OnClickListener {
 		if (view == signin_btn) {
 			String tenantID = tenantID_edit.getText().toString().trim();
 			String password = password_edit.getText().toString().trim();
+			if("".equals(tenantID)) {
+				DialogUtil.showDialog(context, "账号不能为空，请重新输入！", false);
+				return;
+			} 
+			
+			if("".equals(password)) {
+				DialogUtil.showDialog(context, "密码不能为空，请重新输入！", false);
+				return;
+			} 
+			
 			int lgn = login(tenantID, password);
 			
 			//开发调试暂用*****

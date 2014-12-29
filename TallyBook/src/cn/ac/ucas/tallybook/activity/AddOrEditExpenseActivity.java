@@ -246,7 +246,7 @@ public class AddOrEditExpenseActivity extends Activity implements OnClickListene
 		//获取数据(TenantID, Type, CategoryID, Money, ExpenseTime, Note)
 		map.put("Type", type+"");//
 		map.put("CategoryID", selectedCat+"");
-		map.put("Money", cost_btn.getText().toString().trim().substring(1));
+		map.put("Money", cost_btn.getText().toString().trim().substring(1).replace(",", ""));
 		map.put("ExpenseTime", trade_time_btn.getText().toString().trim());
 		map.put("Note", note_btn.getText().toString().trim());
 
