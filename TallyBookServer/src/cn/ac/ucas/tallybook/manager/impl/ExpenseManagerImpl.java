@@ -221,8 +221,9 @@ public class ExpenseManagerImpl implements ExpenseManager {
 	}
 
 	@Override
-	public void deleteExpense(int expenseID) {
+	public boolean deleteExpense(int expenseID) {
 		
+		boolean delFlag = false;
 		String str = "delete from Expense where ExpenseID = ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -232,13 +233,15 @@ public class ExpenseManagerImpl implements ExpenseManager {
 			pstmt = conn.prepareStatement(str);
 			pstmt.setInt(1, expenseID);
 			pstmt.executeUpdate();
-
+			delFlag = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			DB.close(pstmt);
 			DB.close(conn);
 		}
+		
+		return delFlag;
 	}
 	
 	/**

@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jdk.nashorn.api.scripting.JSObject;
+
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import cn.ac.ucas.tallybook.manager.ExpenseManager;
 import cn.ac.ucas.tallybook.manager.impl.ExpenseManagerImpl;
@@ -57,6 +60,17 @@ public class LoadFlowServlet extends HttpServlet {
 				data.add(1, psumAll);
 				data.add(2, expenses);
 
+				JSONArray jsonArray = new JSONArray(data);
+				res.getWriter().println(jsonArray);
+			}
+			
+			if("delFlowInfo".equals(target)) {
+				ExpenseManager expenseManager = ExpenseManagerImpl.getInstance();
+				int expenseID = Integer.parseInt(req.getParameter("expenseID"));
+				boolean delFlag = expenseManager.deleteExpense(expenseID);
+				List data = new ArrayList();
+				data.add(0, delFlag);
+//				JSONObject jsonObject = new JSONObject(delFlag);
 				JSONArray jsonArray = new JSONArray(data);
 				res.getWriter().println(jsonArray);
 			}

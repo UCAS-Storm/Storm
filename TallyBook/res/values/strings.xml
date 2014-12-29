@@ -15,6 +15,7 @@
 	<string name="exit_ok">确定</string>
 	<string name="exit_cancle">取消</string>
 	<string name="error_system_message">系统错误</string>
+	<string name="message_queren_system">确定要删除吗？</string>
 	
     <string name="haha">mymoney</string>
     <string name="app_name">Storm记账</string>

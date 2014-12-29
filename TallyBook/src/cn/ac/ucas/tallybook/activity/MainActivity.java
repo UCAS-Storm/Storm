@@ -4,20 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
-import android.R.bool;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import cn.ac.ucas.tallybook.util.DialogUtil;
-import cn.ac.ucas.tallybook.util.GeneralInfo;
 import cn.ac.ucas.tallybook.util.HttpUtil;
 
 public class MainActivity extends Activity implements OnClickListener {
