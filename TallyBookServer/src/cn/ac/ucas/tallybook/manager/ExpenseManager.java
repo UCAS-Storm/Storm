@@ -17,7 +17,7 @@ public interface ExpenseManager {
 	
 	public void upadteExpense(Expense expense);
 	
-	public void deleteExpense(int expenseID);
+	public boolean deleteExpense(int expenseID);
 	
 	public String findCategoryNameByID(int categoryID);
 	
