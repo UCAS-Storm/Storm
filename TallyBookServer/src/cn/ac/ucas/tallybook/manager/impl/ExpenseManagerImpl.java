@@ -32,7 +32,7 @@ public class ExpenseManagerImpl implements ExpenseManager {
 	 * 查找某段时间内的支出记录
 	 */
 	@Override
-	public List<Expense> findAllExpenses(int pageNo, int pageSize, String tenantID,
+	public List<Expense> findAllExpenses(String tenantID,
 			String startTime, String endTime) {
 		
 		StringBuffer sb = new StringBuffer();
@@ -45,7 +45,7 @@ public class ExpenseManagerImpl implements ExpenseManager {
 		sb.append("SELECT ExpenseID, type, CategoryID, Money, ExpenseTime, Note FROM Expense WHERE TenantID = ?")
 			.append(" AND ExpenseTime >= ?")
 			.append(" AND ExpenseTime <= ?")
-			.append(" ORDER BY ExpenseTime ASC LIMIT ?,?");
+			.append(" ORDER BY ExpenseTime ASC");
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -57,8 +57,8 @@ public class ExpenseManagerImpl implements ExpenseManager {
 			pstmt.setString(1, tenantID);
 			pstmt.setDate(2, new Date(BaseFormat.String2Date(startTime).getTime()));
 			pstmt.setDate(3, new Date(BaseFormat.String2Date(endTime).getTime()));
-			pstmt.setInt(4, (pageNo - 1) * pageSize);
-			pstmt.setInt(5, pageSize);
+//			pstmt.setInt(4, (pageNo - 1) * pageSize);
+//			pstmt.setInt(5, pageSize);
 			
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -91,7 +91,7 @@ public class ExpenseManagerImpl implements ExpenseManager {
 		
 		sb.append("SELECT ExpenseID, Type, CategoryID, Money, ExpenseTime, Note FROM Expense ")
 			.append(" WHERE TenantID = ? AND ExpenseTime = CURRENT_DATE() ")
-			.append(" ORDER BY ExpenseTime ASC LIMIT ?,?");
+			.append(" ORDER BY ExpenseTime DESC LIMIT ?,?");
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

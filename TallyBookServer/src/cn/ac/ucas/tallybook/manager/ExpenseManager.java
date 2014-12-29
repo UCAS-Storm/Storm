@@ -7,8 +7,7 @@ import cn.ac.ucas.tallybook.model.Expense;
 
 public interface ExpenseManager {
 	
-	public List<Expense> findAllExpenses(int pageNo, int pageSize,
-			String tenantID, String startTime, String endTime); 
+	public List<Expense> findAllExpenses(String tenantID, String startTime, String endTime); 
 	
 	public List<Expense> findExpenses(int pageNo, int pageSize, String tenantID);
 	

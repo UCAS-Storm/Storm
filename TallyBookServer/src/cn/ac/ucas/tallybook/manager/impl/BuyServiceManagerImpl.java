@@ -30,7 +30,7 @@ public class BuyServiceManagerImpl implements BuyServiceManager {
 	@Override
 	public List findAllBuyService(String tenantID) {
 		
-		String str = "SELECT ServiceID, Money, StartTime, EndTime FROM BuyService WHERE TenantID =? AND EndTime >=?";
+		String str = "SELECT BuyServiceID, ServiceID, Money, StartTime, EndTime FROM BuyService WHERE TenantID =? AND EndTime >=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -46,7 +46,8 @@ public class BuyServiceManagerImpl implements BuyServiceManager {
 			while (rs.next()) {
 				BuyService buyService = new BuyService();
 				buyService.setTenantID(tenantID);
-				buyService.setBuyServiceID(rs.getInt("ServiceID"));
+				buyService.setBuyServiceID(rs.getInt("BuyServiceID"));
+				buyService.setServiceID(rs.getInt("ServiceID"));;
 				buyService.setMoney(rs.getDouble("Money"));
 				buyService.setStartTime(rs.getDate("StartTime"));
 				buyService.setEndTime(rs.getDate("EndTime"));

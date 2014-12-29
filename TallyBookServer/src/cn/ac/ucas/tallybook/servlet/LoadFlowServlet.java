@@ -13,8 +13,9 @@ import org.json.JSONArray;
 
 import cn.ac.ucas.tallybook.manager.ExpenseManager;
 import cn.ac.ucas.tallybook.manager.impl.ExpenseManagerImpl;
+import cn.ac.ucas.tallybook.model.Expense;
 
-public class LoadInfoServlet extends HttpServlet {
+public class LoadFlowServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -27,28 +28,30 @@ public class LoadInfoServlet extends HttpServlet {
 		res.setContentType("text/html; charset=UTF-8");
 		String target = req.getParameter("target");
 //		String tenantID = (String) req.getSession().getAttribute("tenantID");
+		String starTime = req.getParameter("startTime");
+		String endTime = req.getParameter("endTime");
 		/**
 		 * 调试用
 		 */
 		String tenantID = "liubei";
+//		String starTime = "2008-08-08";
+//		String endTime = "2014-12-31";
 		
 		if(tenantID != null && !"".equals(tenantID)) {
 			
 			/**
 			 * 响应主界面请求:只显示当天最近两条记录
 			 */
-			if("loadMainInfo".equals(target)) {
-				
-				int pageNo = 1;
-				int pageSize = 3;
+			if("loadFlowInfo".equals(target)) {
 				
 				ExpenseManager expenseManager = ExpenseManagerImpl.getInstance();
 				//收入
-				double isumAll = expenseManager.sumAll(tenantID, 1);
-				 //支出
-				double psumAll = expenseManager.sumAll(tenantID, 2);
-				//花费记录
-				List expenses = expenseManager.findExpenses(pageNo, pageSize, tenantID);
+				double isumAll = expenseManager.sumAllPeriod(tenantID, 1, starTime, endTime);
+				//支出
+				double psumAll = expenseManager.sumAllPeriod(tenantID, 2, starTime, endTime);
+				//按类别统计收入、支出
+				List<Expense> expenses = expenseManager.findAllExpenses(tenantID, starTime, endTime);
+				
 				List data = new ArrayList();
 				data.add(0, isumAll);
 				data.add(1, psumAll);

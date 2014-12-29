@@ -15,27 +15,31 @@ import cn.ac.ucas.tallybook.activity.R;
 public class ExpenseArrayAdapter extends BaseAdapter {
 
 	// 需要包装的JSONArray
-	private JSONArray incomeArray;
+	private JSONArray expenseArray;
 	
 	private Context context;
 	
-	public ExpenseArrayAdapter(JSONArray incomeArray, Context context)
+	//区分是哪个listview的listview_item
+//	private String  itemType;
+	
+	public ExpenseArrayAdapter(JSONArray expenseArray, Context context)
 	{
-		this.incomeArray = incomeArray;
+//		this.itemType = itemType;
+		this.expenseArray = expenseArray;
 		this.context = context;
 	}
 	@Override
 	public int getCount()
 	{
 		// 返回ListView包含的列表项的数量
-		return incomeArray.length();
+		return expenseArray.length();
 	}
 
 	@Override
 	public Object getItem(int position)
 	{
 		// 获取指定列表项所包装的JSONObject
-		return incomeArray.optJSONObject(position);
+		return expenseArray.optJSONObject(position);
 	}
 
 	@Override
@@ -44,7 +48,7 @@ public class ExpenseArrayAdapter extends BaseAdapter {
 		try
 		{
 			//获取JSONObject的ID
-			return ((JSONObject) getItem(position)).getInt("incomeID");
+			return ((JSONObject) getItem(position)).getInt("expenseID");
 		}
 		catch (JSONException e)
 		{
@@ -80,6 +84,6 @@ public class ExpenseArrayAdapter extends BaseAdapter {
 	 * @param jsonArray
 	 */
 	public void loadMore(JSONArray jsonArray) {
-		incomeArray.put(jsonArray);
+		expenseArray.put(jsonArray);
 	}
 }

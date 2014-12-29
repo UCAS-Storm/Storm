@@ -93,10 +93,10 @@ public class AddOrEditExpenseActivity extends Activity implements OnClickListene
 		payout_tab_rb = (RadioButton) findViewById(R.id.payout_tab_rb);
 		income_tab_rb = (RadioButton) findViewById(R.id.income_tab_rb);
 		switch (type) {
-		case 0:
+		case 1:
 			income_tab_rb.setChecked(true);
 			break;
-		case 1:
+		case 2:
 			payout_tab_rb.setChecked(true);
 			break;
 		default:
