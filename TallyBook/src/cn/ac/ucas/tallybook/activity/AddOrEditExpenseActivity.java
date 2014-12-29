@@ -9,8 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONObject;
-
+import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -37,7 +36,7 @@ import cn.ac.ucas.tallybook.util.GeneralInfo;
 import cn.ac.ucas.tallybook.util.HttpUtil;
 
 /**
- * 记一笔
+ * 记一笔or编辑
  * @author Administrator
  *
  */
@@ -47,6 +46,7 @@ public class AddOrEditExpenseActivity extends Activity implements OnClickListene
 	
 
 	private int type = GeneralInfo.getPayoutMode();
+	private int lgn = 1;
 	
 	private TextView title_tv = null;
 	private RadioGroup trans_type_tab_rg = null;
@@ -62,6 +62,8 @@ public class AddOrEditExpenseActivity extends Activity implements OnClickListene
 	private Spinner category_spn = null;
 	private ArrayAdapter<String> adapter;
 	private List<String> list = null;
+	private String categorys[] = { "餐饮", "娱乐", "购物", "交通", "工资", "其他"};
+	private int selectedCat = 6; //选中的类别,默认 其他
 	
 	private Calendar calendar = Calendar.getInstance();
 	//支出(或收入)时间
@@ -82,16 +84,14 @@ public class AddOrEditExpenseActivity extends Activity implements OnClickListene
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_or_edit_expense_activity);
+		lgn = getIntent().getIntExtra("lgn", lgn);
 		loadingFormation();
 	}
 
 	public void loadingFormation() {
 		
-		Intent intent = getIntent();
-		type = intent.getIntExtra("type", GeneralInfo.getPayoutMode());
-//		if(GeneralInfo.getEditMode() == type) {
-//			editObject = (JSONObject)intent.getParcelableExtra("jsonObject");
-//		}
+		type = getIntent().getIntExtra("type", GeneralInfo.getPayoutMode());
+		
 		title_tv = (TextView) findViewById(R.id.title_tv);
 		
 		trans_type_tab_rg = (RadioGroup) findViewById(R.id.trans_type_tab_rg);
@@ -111,26 +111,29 @@ public class AddOrEditExpenseActivity extends Activity implements OnClickListene
 		payout_tab_rb.setOnCheckedChangeListener(this);
 		income_tab_rb.setOnCheckedChangeListener(this);
 		
+		//金额
 		cost_btn = (Button)findViewById(R.id.cost_btn);
 		cost_btn.setOnClickListener(this);
 		
 		//类别
 		category_spn = (Spinner)findViewById(R.id.category_spn);
 		//此处list的值可以从数据库读出
-		list = Arrays.asList(new String[] { "餐饮", "娱乐", "购物", "交通", "工资", "其他"});
+		list = Arrays.asList(categorys);
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		category_spn.setAdapter(adapter);
 		category_spn.setOnItemSelectedListener(this);
 		
+		//时间
 		trade_time_btn = (Button)findViewById(R.id.trade_time_btn);
 		trade_time_btn.setOnClickListener(this);
+		
 		//编辑模式
-		if(type == GeneralInfo.getEditMode()) {
-			
-		} else {
+//		if(type == GeneralInfo.getEditMode()) {
+//			
+//		} else {
 			trade_time_btn.setText(format(calendar.getTime()));
-		}
+//		}
 		
 		//备注按钮
 		note_btn = (Button) findViewById(R.id.note_btn);
@@ -209,29 +212,24 @@ public class AddOrEditExpenseActivity extends Activity implements OnClickListene
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long arg3) {
-		
+		selectedCat = position+1;
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
-		
+		//do nothing
 	}
 
 	@Override
 	public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-//		//支出
-//		if(payout_tab_rb.isChecked())
-//		{
-//			type = PAYOUT_MODE;
-//			corporation_fl.setVisibility(View.VISIBLE);
-//			empty_fl.setVisibility(View.GONE);
-//		}else //收入
-//		{
-//			type = INCOME_MODE;
-//			corporation_fl.setVisibility(View.GONE);
-//			empty_fl.setVisibility(View.VISIBLE);
-//		}
-//		updateInfo(-1);
+		//支出
+		if(payout_tab_rb.isChecked())
+		{
+			type = GeneralInfo.getPayoutMode();
+		}else //收入
+		{
+			type = GeneralInfo.getIncomeMode();
+		}
 	}
 	
 	
@@ -246,17 +244,19 @@ public class AddOrEditExpenseActivity extends Activity implements OnClickListene
 		map.put("target", "saveExpenseInfo");
 		
 		//获取数据(TenantID, Type, CategoryID, Money, ExpenseTime, Note)
-//		map.put("Type",);
-				
+		map.put("Type", type+"");//
+		map.put("CategoryID", selectedCat+"");
+		map.put("Money", cost_btn.getText().toString().trim().substring(1));
+		map.put("ExpenseTime", trade_time_btn.getText().toString().trim());
+		map.put("Note", note_btn.getText().toString().trim());
+
 		// 定义发送请求的URL
 		String url = HttpUtil.BASE_URL + "SaveExpenseServlet";
 		try {
 			HttpUtil.postRequest(url, map);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-		
+		}		
 		exit();
 	}
 	
@@ -284,6 +284,7 @@ public class AddOrEditExpenseActivity extends Activity implements OnClickListene
 	private void exit(){
 		if(type != GeneralInfo.getEditMode()){
 			Intent intent = new Intent(context, MainTallyBookActivity.class);
+			intent.putExtra("lgn", lgn);
 			startActivity(intent);
 			finish();
 		}else{
