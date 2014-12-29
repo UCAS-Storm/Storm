@@ -36,4 +36,13 @@
     <servlet-name>LoadStatServlet</servlet-name>
     <url-pattern>/servlet/LoadStatServlet</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>LoadFlowServlet</servlet-name>
+    <servlet-class>cn.ac.ucas.tallybook.servlet.LoadFlowServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadFlowServlet</servlet-name>
+    <url-pattern>/servlet/LoadFlowServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

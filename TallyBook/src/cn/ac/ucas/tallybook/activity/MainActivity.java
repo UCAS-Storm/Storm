@@ -3,8 +3,10 @@ package cn.ac.ucas.tallybook.activity;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.R.bool;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -45,21 +47,24 @@ public class MainActivity extends Activity implements OnClickListener {
 		if (view == signin_btn) {
 			String tenantID = tenantID_edit.getText().toString().trim();
 			String password = password_edit.getText().toString().trim();
-//			int lgn = login(tenantID, password);
+			int lgn = login(tenantID, password);
 			
 			//开发调试暂用*****
-			int lgn = 1;
+//			int lgn = 1;
 			//************
 			
-			if(lgn == 1) {
+			if(lgn == 4) {
+				DialogUtil.showDialog(context, "没有购买服务或服务已到期！", false);
+			} else if(lgn == 5) {
+				DialogUtil.showDialog(context, "账号或密码错误，请重新输入！", false);
+			} else if(lgn == 3) {
+				DialogUtil.showDialog(context, "服务器响应异常，请稍后再试！", false);
+			} else {
 				intent = new Intent(context, MainTallyBookActivity.class);
+				intent.putExtra("lgn", lgn);
 				startActivity(intent);
 				finish();
-			} else if(lgn == 2) {
-				DialogUtil.showDialog(context, "账号或密码错误，请重新输入！", false);
-			} else {
-				DialogUtil.showDialog(context, "服务器响应异常，请稍后再试！", false);
-			}
+			} 
 		}
 	}
 	
@@ -70,6 +75,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	 * @return
 	 */
 	public int login(String tenantID, String password) {
+		//服务器或服务器连接错误
 		int flag = 3;
 		// 使用Map封装请求参数
 		Map<String, String> map = new HashMap<String, String>();
@@ -78,14 +84,36 @@ public class MainActivity extends Activity implements OnClickListener {
 		map.put("password", password);
 		// 定义发送请求的URL
 		String url = HttpUtil.BASE_URL + "TenantServlet";
-		JSONObject jsonObject = null;
+		JSONArray jsonArray = null;
+		JSONArray buyServiceArray = null;
 		// 发送请求
 		 try {
-			jsonObject = new JSONObject(HttpUtil.postRequest(url, map));
-			if(jsonObject.getBoolean("flag")) {
-				flag = 1;
-			} else if(!jsonObject.getBoolean("flag")) {
-				flag = 2;
+			 jsonArray = new JSONArray(HttpUtil.postRequest(url, map));
+			 boolean login = jsonArray.getBoolean(0);
+			 
+			if(login) {
+				buyServiceArray = jsonArray.getJSONArray(1);
+				if(null == buyServiceArray || 0 == buyServiceArray.length()) {
+					//没有购买服务或服务已到期
+					flag = 4;
+				} else {
+					for (int i = 0; i < buyServiceArray.length(); i++) {
+						int service = buyServiceArray.optJSONObject(i).getInt("serviceID");
+						if(1 == service || 2 == service || 3 == service) {
+							//记账基础功能
+							flag = 1;
+							break;
+						} else if(4 == service || 5 == service || 6 == service) {
+							//记账高级功能
+							flag = 2;
+							break;
+						}
+						
+					}
+				}
+			} else if(!login) {
+				//账号或密码错误
+				flag = 5;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

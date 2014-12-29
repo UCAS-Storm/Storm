@@ -27,6 +27,7 @@
         <activity android:name="cn.ac.ucas.tallybook.activity.KeyPadActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="cn.ac.ucas.tallybook.activity.NavStatisticsActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="org.achartengine.GraphicalActivity" />
+		<activity android:name="cn.ac.ucas.tallybook.activity.NavFlowActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
 		<!--  
 		<activity android:name=".NavExpenseActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
         <activity android:name=".KeyPad" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />

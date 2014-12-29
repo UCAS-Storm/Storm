@@ -104,9 +104,11 @@
 		<item name="android:layout_width">fill_parent</item>
 		<item name="android:layout_height">fill_parent</item>
 	</style>
+	<!--  
 	<style name="Widget.CompoundButton.CheckBox" parent="@style/Widget.CompoundButton.CheckBox">
 		<item name="android:button">@drawable/common_btn_check</item>
 	</style>
+	-->
 	<style name="common_title">
 		<item name="android:textSize">14.0dip</item>
 		<item name="android:textColor">@color/black</item>
