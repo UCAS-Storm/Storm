@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -57,6 +58,8 @@ public class NavFlowActivity extends Activity implements OnClickListener, Adapte
 	//查询按钮
 	private Button query_btn = null;
 	
+	private TextView hava_no_flow_expense_tv = null;
+	
 	private Calendar calendar = Calendar.getInstance();
 	
 	@Override
@@ -80,6 +83,8 @@ public class NavFlowActivity extends Activity implements OnClickListener, Adapte
 		//查询按钮
 		query_btn = (Button) findViewById(R.id.flow_query_btn);
 		query_btn.setOnClickListener(this);
+		
+		hava_no_flow_expense_tv = (TextView)findViewById(R.id.hava_no_flow_expense_tv);
 		
 		//总收入
 		income_sum_tv = (TextView)findViewById(R.id.flow_income_sum_tv);
@@ -155,15 +160,19 @@ public class NavFlowActivity extends Activity implements OnClickListener, Adapte
 			if(jsonArray != null) {
 				incomeSum = jsonArray.getInt(0);
 				payoutSum = jsonArray.getInt(1);
+				
+				income_sum_tv.setTextColor(context.getResources().getColor(R.color.transaction_income_amount));
+				payout_sum_tv.setTextColor(context.getResources().getColor(R.color.transaction_payout_amount));
 				String isumAllStr = String.format("￥%.2f", incomeSum);
 				income_sum_tv.setText(isumAllStr);
 				String psumAllStr = String.format("￥%.2f", payoutSum);
 				payout_sum_tv.setText(psumAllStr);
-				//获取收入分类数据
+
 				JSONArray expenseArray = jsonArray.getJSONArray(2);
-				if(expenseArray != null) {
+				if(expenseArray != null && 0 != expenseArray.length()) {
 					expense_lv.setAdapter(new ExpenseArrayAdapter(expenseArray, context));
-				} else {
+				} else if(expenseArray.length() == 0) {
+					hava_no_flow_expense_tv.setVisibility(View.VISIBLE);
 					Toast toast = Toast.makeText(getApplicationContext(), "今天还没有记录呢，快来添加吧。", 
 								Toast.LENGTH_LONG);
 					toast.setGravity(Gravity.CENTER, 0, 0);
@@ -216,22 +225,20 @@ public class NavFlowActivity extends Activity implements OnClickListener, Adapte
 			JSONObject jsonObject;
 
 			public NavItemLongClickListener(NavFlowActivity nav, JSONObject jsonObject) {
-//			public NavItemLongClickListener(NavFlowActivity nav) {
 				this.nav = nav;
 				this.jsonObject = jsonObject;
 			}
 			
 			public void onClick(DialogInterface dialog, int which) {
 				if (jsonObject != null) {
-					if (which == 0) {
-						Intent intent = new Intent(nav, AddOrEditExpenseActivity.class);
-						intent.putExtra("mode", GeneralInfo.getEditMode());
-						Bundle mBundle = new Bundle();  
-//				        mBundle.putParcelable("data", data);  
+//					if (which == 0) {
+//						Intent intent = new Intent(nav, AddOrEditExpenseActivity.class);
+//						intent.putExtra("type", GeneralInfo.getEditMode());
+//						Bundle mBundle = new Bundle();  
+//				        mBundle.putParcelable("jsonObject", (Parcelable) jsonObject);  
 //						intent.putExtras(mBundle);
-//						intent.putExtra(str_mode, mode);
 //						nav.startActivityForResult(intent, 0);
-					} else {
+//					} else {
 						AlertDialog.Builder builder = new AlertDialog.Builder(nav);
 						builder.setTitle(R.string.delete_title);
 						builder.setMessage(R.string.message_queren_system);
@@ -273,7 +280,7 @@ public class NavFlowActivity extends Activity implements OnClickListener, Adapte
 //					else {
 //					Toast.makeText(nav, getString(R.string.message_error_edit), 0).show();
 //				}
-			}
+//			}
 		}
 		
 		JSONObject jsonObject = (JSONObject)view.getTag();

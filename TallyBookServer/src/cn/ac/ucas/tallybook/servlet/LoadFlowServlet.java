@@ -2,6 +2,7 @@ package cn.ac.ucas.tallybook.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,6 +18,7 @@ import org.json.JSONObject;
 import cn.ac.ucas.tallybook.manager.ExpenseManager;
 import cn.ac.ucas.tallybook.manager.impl.ExpenseManagerImpl;
 import cn.ac.ucas.tallybook.model.Expense;
+import cn.ac.ucas.tallybook.util.BaseFormat;
 
 public class LoadFlowServlet extends HttpServlet {
 
@@ -43,7 +45,7 @@ public class LoadFlowServlet extends HttpServlet {
 		if(tenantID != null && !"".equals(tenantID)) {
 			
 			/**
-			 * 响应主界面请求:只显示当天最近两条记录
+			 * 响应
 			 */
 			if("loadFlowInfo".equals(target)) {
 				
@@ -54,7 +56,10 @@ public class LoadFlowServlet extends HttpServlet {
 				double psumAll = expenseManager.sumAllPeriod(tenantID, 2, starTime, endTime);
 				//按类别统计收入、支出
 				List<Expense> expenses = expenseManager.findAllExpenses(tenantID, starTime, endTime);
-				
+				for (Iterator iterator = expenses.iterator(); iterator.hasNext();) {
+					Expense expense = (Expense) iterator.next();
+					expense.setExpenseTimeStr(BaseFormat.Date2String(expense.getExpenseTime()));
+				}
 				List data = new ArrayList();
 				data.add(0, isumAll);
 				data.add(1, psumAll);

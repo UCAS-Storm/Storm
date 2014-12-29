@@ -6,6 +6,7 @@
     <string name="login_label_password">密码</string>
     <string name="login_label_signin">登         录</string>
     <string name="login_register_link">没有账号？注册</string>
+    <string name="today_expense_two">今日最近两笔记录：</string>
     
 	<string name="hello">Hello World, Main!</string>
 	

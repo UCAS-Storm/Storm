@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -35,7 +37,7 @@ import cn.ac.ucas.tallybook.util.GeneralInfo;
 import cn.ac.ucas.tallybook.util.HttpUtil;
 
 /**
- * 记一笔or编辑
+ * 记一笔
  * @author Administrator
  *
  */
@@ -85,8 +87,11 @@ public class AddOrEditExpenseActivity extends Activity implements OnClickListene
 
 	public void loadingFormation() {
 		
-		type = getIntent().getIntExtra("type", GeneralInfo.getPayoutMode());
-		
+		Intent intent = getIntent();
+		type = intent.getIntExtra("type", GeneralInfo.getPayoutMode());
+//		if(GeneralInfo.getEditMode() == type) {
+//			editObject = (JSONObject)intent.getParcelableExtra("jsonObject");
+//		}
 		title_tv = (TextView) findViewById(R.id.title_tv);
 		
 		trans_type_tab_rg = (RadioGroup) findViewById(R.id.trans_type_tab_rg);
