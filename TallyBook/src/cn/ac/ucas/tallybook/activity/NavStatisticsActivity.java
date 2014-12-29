@@ -225,7 +225,7 @@ public class NavStatisticsActivity extends Activity implements OnClickListener{
 		mRenderer.setStartAngle(180);// 设置为水平开始
 		mRenderer.setDisplayValues(true);// 显示数据
 		mRenderer.setFitLegend(true);// 设置是否显示图例
-		mRenderer.setLegendTextSize(28);// 设置图例字体大小
+		mRenderer.setLegendTextSize(20);// 设置图例字体大小
 		mRenderer.setLabelsColor(Color.BLACK);
 		mRenderer.setLegendHeight(10);// 设置图例高度
 		mRenderer.setChartTitle(type==1 ? "收入饼图" : "支出饼图");// 设置饼图标题
@@ -243,7 +243,7 @@ public class NavStatisticsActivity extends Activity implements OnClickListener{
 				renderer.setColor(getRandomColor());// 设置描绘器的颜色
 			}
 			renderer.setChartValuesFormat(NumberFormat.getPercentInstance());// 设置百分比
-			mRenderer.setChartTitleTextSize(32);// 设置饼图标题大小
+			mRenderer.setChartTitleTextSize(22);// 设置饼图标题大小
 			mRenderer.addSeriesRenderer(renderer);// 将最新的描绘器添加到DefaultRenderer中
 		}
 		if (mChartView == null) {// 为空需要从ChartFactory获取PieChartView

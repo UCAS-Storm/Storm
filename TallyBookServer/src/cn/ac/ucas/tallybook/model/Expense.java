@@ -20,6 +20,8 @@ public class Expense {
 	
 	private Date expenseTime;
 	
+	private String expenseTimeStr;
+	
 	private double money;
 	
 	private String note;
@@ -70,6 +72,14 @@ public class Expense {
 
 	public void setExpenseTime(Date expenseTime) {
 		this.expenseTime = expenseTime;
+	}
+
+	public String getExpenseTimeStr() {
+		return expenseTimeStr;
+	}
+
+	public void setExpenseTimeStr(String expenseTimeStr) {
+		this.expenseTimeStr = expenseTimeStr;
 	}
 
 	public double getMoney() {

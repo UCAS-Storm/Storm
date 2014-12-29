@@ -63,15 +63,25 @@ public class ExpenseArrayAdapter extends BaseAdapter {
 		view = LayoutInflater.from(context).inflate(R.layout.main_tally_book_list_item, null);
 		TextView category_name_tv = (TextView)view.findViewById(R.id.category_name_tv);
 		TextView expense_tv = (TextView)view.findViewById(R.id.expense_tv);
+		TextView expenseTime_tv = (TextView)view.findViewById(R.id.expenseTime_tv);
+		JSONObject jsonObject = (JSONObject)getItem(position);
 		try	{
 			// 获取JSONArray数组元素的categoryName属性
-			String categoryName = ((JSONObject)getItem(position)).getString("categoryName");
+			String categoryName = jsonObject.getString("categoryName");
 			//获取JSONArray数组元素的money属性
-			double money = ((JSONObject)getItem(position)).getDouble("money");
+			double money = jsonObject.getDouble("money");
 			String moneyStr = String.format("￥%.2f", money);
+			String expenseTimeStr = jsonObject.getString("expenseTimeStr");
+			
+			if (jsonObject.getInt("type") == 1)
+				expense_tv.setTextColor(context.getResources().getColor(R.color.transaction_income_amount));
+			else
+				expense_tv.setTextColor(context.getResources().getColor(R.color.transaction_payout_amount));
 			// 设置TextView所显示的内容
 			category_name_tv.setText(categoryName);	
 			expense_tv.setText(moneyStr);
+			expenseTime_tv.setText(expenseTimeStr);
+			view.setTag(jsonObject);
 		} catch (Exception e)
 		{
 			e.printStackTrace();
