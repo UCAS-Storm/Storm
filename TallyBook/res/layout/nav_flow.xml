@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" style="@style/common_bg"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:id="@+id/title_tv" android:background="@drawable/common_title_bg_no_shadow" android:text="收支流水" style="@style/common_title" />
+    <LinearLayout android:orientation="vertical" android:id="@+id/switch_time_ly" android:background="@drawable/switch_time_bar_bg" android:layout_width="fill_parent" android:layout_height="fill_parent">
+    	<LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+                    
+                    <LinearLayout
+                        style="@style/form_row_input_middle"
+                        android:orientation="horizontal"
+                        android:paddingLeft="0.0dip"
+                        android:paddingRight="0.0dip" >
+
+                        <FrameLayout
+                            android:id="@+id/trade_time_fl"
+                            android:layout_width="fill_parent"
+                       		android:layout_height="50.0dip">
+
+                           <TextView
+                            style="@style/form_row_label"
+                            android:text="开始时间"
+                            android:textColor="@color/black" />
+                            <Button
+                                android:id="@+id/flow_start_time_btn"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:background="@drawable/form_row_input_middle_short_left"
+                               style="@style/form_row_input_middle"
+                                android:textColor="@color/black" />
+                            <ImageView style="@style/form_row_go_detail" />
+                        </FrameLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/form_row_input_middle"
+                        android:orientation="horizontal"
+                        android:paddingLeft="0.0dip"
+                        android:paddingRight="0.0dip" >
+
+                        <FrameLayout
+                            android:id="@+id/trade_time_fl"
+                            android:layout_width="fill_parent"
+                       		android:layout_height="50.0dip">
+
+                           <TextView
+                            style="@style/form_row_label"
+                            android:text="结束时间"
+                            android:textColor="@color/black" />
+                            <Button
+                                android:id="@+id/flow_end_time_btn"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:background="@drawable/form_row_input_middle_short_left"
+                               style="@style/form_row_input_middle"
+                                android:textColor="@color/black" />
+                            <ImageView style="@style/form_row_go_detail" />
+                        </FrameLayout>
+                    </LinearLayout>
+                   
+                    
+                    <RelativeLayout
+                        style="@style/form_row_layout_middle"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/form_row_input_top_normal" >
+
+                        <Button
+                            android:id="@+id/flow_query_btn"
+                            style="@style/common_toolbar_btn_for_addexpense"
+                            android:layout_width="fill_parent"
+                            android:text="开始查询" />
+                    </RelativeLayout>
+                </LinearLayout>
+    	
+        
+        <LinearLayout android:orientation="horizontal" 
+        	android:layout_width="fill_parent" android:layout_height="wrap_content"
+        	 android:background="@drawable/setting_account_listview_header" >
+           
+		    <LinearLayout android:gravity="right" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="15.0dip" android:layout_weight="1.0">
+		        <TextView android:textSize="16.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:textColor="@color/white" android:text="收入:" />
+		        <TextView android:textSize="18.0dip" android:textColor="#ffffffff" android:id="@+id/flow_income_sum_tv" android:layout_width="wrap_content" android:layout_height="wrap_content"  />
+		    </LinearLayout>
+		    <LinearLayout android:gravity="right" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="15.0dip" android:layout_weight="1.0">
+		        <TextView android:textSize="16.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:textColor="@color/white" android:text="支出:" />
+		        <TextView android:textSize="18.0dip" android:textColor="#ffffffff" android:id="@+id/flow_payout_sum_tv" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		    </LinearLayout>
+        </LinearLayout>
+    
+        <!--  
+		<LinearLayout style="@style/common_add_toolbar">
+		</LinearLayout>
+		-->
+	    <LinearLayout  
+		    android:orientation="vertical"  
+		    android:layout_width="fill_parent"  
+		    android:layout_height="fill_parent"  
+		    android:paddingLeft="3dp"  
+		    android:paddingRight="3dp"> 
+	        <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+	        <ImageView android:id="@+id/flow_lv_empty_iv" android:visibility="gone" style="@style/common_lv_empty_for_expense" />
+	        <ListView android:id="@+id/flow_expense_lv" android:layout_width="fill_parent" android:layout_height="fill_parent" style="@style/Widget.ListView" android:fastScrollEnabled="true" />
+	   		</FrameLayout> 
+		</LinearLayout>
+    </LinearLayout>     
+    
+</LinearLayout>

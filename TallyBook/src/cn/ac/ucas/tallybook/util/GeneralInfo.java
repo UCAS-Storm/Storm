@@ -1,9 +1,5 @@
 package cn.ac.ucas.tallybook.util;
 
-import java.util.Calendar;
-
-import android.app.DatePickerDialog;
-import android.widget.DatePicker;
 
 public class GeneralInfo {
 	

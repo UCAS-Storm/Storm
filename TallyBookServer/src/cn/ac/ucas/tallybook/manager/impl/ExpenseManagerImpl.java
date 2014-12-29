@@ -32,7 +32,7 @@ public class ExpenseManagerImpl implements ExpenseManager {
 	 * 查找某段时间内的支出记录
 	 */
 	@Override
-	public List<Expense> findAllExpenses(int pageNo, int pageSize, String tenantID,
+	public List<Expense> findAllExpenses(String tenantID,
 			String startTime, String endTime) {
 		
 		StringBuffer sb = new StringBuffer();
@@ -45,7 +45,7 @@ public class ExpenseManagerImpl implements ExpenseManager {
 		sb.append("SELECT ExpenseID, type, CategoryID, Money, ExpenseTime, Note FROM Expense WHERE TenantID = ?")
 			.append(" AND ExpenseTime >= ?")
 			.append(" AND ExpenseTime <= ?")
-			.append(" ORDER BY ExpenseTime ASC LIMIT ?,?");
+			.append(" ORDER BY ExpenseTime ASC");
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -57,8 +57,8 @@ public class ExpenseManagerImpl implements ExpenseManager {
 			pstmt.setString(1, tenantID);
 			pstmt.setDate(2, new Date(BaseFormat.String2Date(startTime).getTime()));
 			pstmt.setDate(3, new Date(BaseFormat.String2Date(endTime).getTime()));
-			pstmt.setInt(4, (pageNo - 1) * pageSize);
-			pstmt.setInt(5, pageSize);
+//			pstmt.setInt(4, (pageNo - 1) * pageSize);
+//			pstmt.setInt(5, pageSize);
 			
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -86,17 +86,23 @@ public class ExpenseManagerImpl implements ExpenseManager {
 	/**
 	 * 查询当前日期一天内的记录
 	 */
-	public List<Expense> findExpenses(String tenantID) {
-		String str = "SELECT ExpenseID, Type, CategoryID, Money, ExpenseTime, Note FROM Expense WHERE TenantID = ? AND ExpenseTime = CURRENT_DATE() ";
+	public List<Expense> findExpenses(int pageNo, int pageSize, String tenantID) {
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append("SELECT ExpenseID, Type, CategoryID, Money, ExpenseTime, Note FROM Expense ")
+			.append(" WHERE TenantID = ? AND ExpenseTime = CURRENT_DATE() ")
+			.append(" ORDER BY ExpenseTime DESC LIMIT ?,?");
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<Expense> expenses = new ArrayList();
+		List<Expense> expenses = new ArrayList<Expense>();
 		
 		conn = DB.getConnection();
 		try {
-			pstmt = conn.prepareStatement(str);
+			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setString(1, tenantID);
+			pstmt.setInt(2, (pageNo - 1) * pageSize);
+			pstmt.setInt(3, pageSize);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Expense expense = new Expense();
@@ -368,15 +374,15 @@ public class ExpenseManagerImpl implements ExpenseManager {
 		return sumByCategs;
 	}
 	
-	public static void main(String[] args) {
-		ExpenseManager expenseManager = new ExpenseManagerImpl();
+//	public static void main(String[] args) {
+//		ExpenseManager expenseManager = new ExpenseManagerImpl();
 //		List<Category> sumByCategs = expenseManager.sumAllPeriodByCategs("liubei", 1, "2014-12-15", "2014-12-26");
 //		for (Iterator<Category> iterator = sumByCategs.iterator(); iterator.hasNext();) {
 //			Category category = (Category) iterator.next();
 //			System.out.println(category.getCategoryID() + ", " + category.getCategoryName() + ", " + category.getCount());
 //		}
 //		
-//		List<Expense> expenses = expenseManager.findExpenses("liubei");
+//		List<Expense> expenses = expenseManager.findExpenses(2, 2, "liubei");
 //		for (Iterator<Expense> iterator = expenses.iterator(); iterator.hasNext();) {
 //			Expense expense = (Expense) iterator.next();
 //			System.out.println(expense.getExpenseID() + ", " + expense.getType() + ", " + expense.getCategoryID() + ", " + expense.getCategoryName()
@@ -399,13 +405,13 @@ public class ExpenseManagerImpl implements ExpenseManager {
 //		
 //		expenseManager.deleteExpense(1);
 		
-		System.out.println(expenseManager.sumAll("liubei", 1));
-		System.out.println(expenseManager.sumAllPeriod("liubei", 1, "2014-12-22", "2014-12-24"));
-		List sumByCategs = expenseManager.sumAllPeriodByCategs("liubei", 1, "2014-12-19", "2014-12-24");
-		for (Iterator iterator = sumByCategs.iterator(); iterator.hasNext();) {
-			Category category = (Category) iterator.next();
-			System.out.println(category.getCategoryID() + ", " + category.getCategoryName() + ", " + category.getCount());
-		}
-	}
+//		System.out.println(expenseManager.sumAll("liubei", 1));
+//		System.out.println(expenseManager.sumAllPeriod("liubei", 1, "2014-12-22", "2014-12-24"));
+//		List sumByCategs = expenseManager.sumAllPeriodByCategs("liubei", 1, "2014-12-19", "2014-12-24");
+//		for (Iterator iterator = sumByCategs.iterator(); iterator.hasNext();) {
+//			Category category = (Category) iterator.next();
+//			System.out.println(category.getCategoryID() + ", " + category.getCategoryName() + ", " + category.getCount());
+//		}
+//	}
 }
 

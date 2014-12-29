@@ -44,8 +44,7 @@
 		    android:paddingRight="3dp"> 
 	        <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
 	        <ImageView android:id="@+id/lv_empty_iv" android:visibility="gone" style="@style/common_lv_empty_for_expense" />
-	        <ListView android:id="@+id/expense_lv" android:layout_width="fill_parent" android:layout_height="fill_parent" style="@style/Widget.ListView" />
-	        <TextView android:id="@+id/listview_loading_tv" style="@style/common_lv_loading_tv" />
+	        <ListView android:id="@+id/expense_lv" android:layout_width="fill_parent" android:layout_height="fill_parent" style="@style/Widget.ListView" android:fastScrollEnabled="true" />
 	   		</FrameLayout> 
 		</LinearLayout>
 		<!-- 当前日期(今天的)所有收支记录 -->

@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,9 +20,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.ac.ucas.tallybook.util.DialogUtil;
+import cn.ac.ucas.tallybook.util.ExpenseArrayAdapter;
 import cn.ac.ucas.tallybook.util.GeneralInfo;
 import cn.ac.ucas.tallybook.util.HttpUtil;
-import cn.ac.ucas.tallybook.util.IncomeArrayAdapter;
 
 public class MainTallyBookActivity extends Activity implements OnClickListener, OnScrollListener {
 
@@ -39,18 +40,21 @@ public class MainTallyBookActivity extends Activity implements OnClickListener, 
 	//当前日期(一天)内的所有收支记录
 	private ListView expense_lv = null;
 	
-	//正在加载TextView
-	TextView listview_loading_tv = null;
-	
 	//流水
 	private TextView nav_flow_tv = null;
 	//统计
 	private TextView nav_statistics_tv = null;
 	
+	//购买的服务类别且没有到期
+	private int lgn = 1;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_tallybook);
+		
+		//购买的服务类别且没有到期,默认为1
+		lgn = getIntent().getIntExtra("lgn", 1);
 		
 		//全部统计之收入总额
 		income_amount_tv = (TextView) findViewById(R.id.income_amount_tv);
@@ -64,10 +68,8 @@ public class MainTallyBookActivity extends Activity implements OnClickListener, 
 		
 		//当前日期(一天)内的所有收支记录
 		expense_lv = (ListView)findViewById(R.id.expense_lv);
-		View load_more_view = LayoutInflater.from(context).inflate(R.layout.load_more, null);
-		expense_lv.addFooterView(load_more_view);
-		
-		listview_loading_tv = (TextView) findViewById(R.id.listview_loading_tv);
+//		View load_more_view = LayoutInflater.from(context).inflate(R.layout.load_more, null);
+//		expense_lv.addFooterView(load_more_view);
 		
 		//流水
 		nav_flow_tv = (TextView)findViewById(R.id.nav_flow);
@@ -76,7 +78,9 @@ public class MainTallyBookActivity extends Activity implements OnClickListener, 
 		//统计
 		nav_statistics_tv = (TextView)findViewById(R.id.nav_statistics);
 		nav_statistics_tv.setOnClickListener(this);
-		
+		/**
+		 * 调试用
+		 */
 		loadMainInfo();
 	}
 
@@ -95,7 +99,18 @@ public class MainTallyBookActivity extends Activity implements OnClickListener, 
 		
 		//统计
 		if (view == nav_statistics_tv) {
-			intent = new Intent(context, NavStatisticsActivity.class);
+			if(2 == lgn) {
+				intent = new Intent(context, NavStatisticsActivity.class);
+				startActivity(intent);
+			} else if(1 == lgn) {
+			    DialogUtil.showDialog(context, "您还没购买记账高级功能呢!", false);
+			}
+			
+		}
+		
+		//流水
+		if(view == nav_flow_tv) {
+			intent = new Intent(context, NavFlowActivity.class);
 			startActivity(intent);
 		}
 	}
@@ -122,9 +137,13 @@ public class MainTallyBookActivity extends Activity implements OnClickListener, 
 				//当前日期的所有收入或支出记录
 				JSONArray expenseArray = jsonArray.getJSONArray(2);
 				if(expenseArray != null) {
-					expense_lv.setAdapter(new IncomeArrayAdapter(expenseArray, context));
+					expense_lv.setAdapter(new ExpenseArrayAdapter(expenseArray, context));
+				} else {
+					Toast toast = Toast.makeText(getApplicationContext(), "今天还没有记录呢，快来添加吧。", 
+								Toast.LENGTH_LONG);
+					toast.setGravity(Gravity.CENTER, 0, 0);
+				    toast.show();
 				}
-				listview_loading_tv.setVisibility(View.VISIBLE);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
