@@ -7,7 +7,7 @@
                 <!--  
                 <TextView android:textSize="25.0dip" android:textStyle="bold" android:id="@+id/month_tv" android:layout_marginLeft="35.0px" style="@style/main_budget_lable_hdpi" />
                 -->
-                <TextView android:paddingBottom="5.0px" android:layout_marginLeft="4.0px" android:text="全部统计:" style="@style/main_budget_lable_hdpi" />
+                <TextView android:paddingBottom="5.0px" android:layout_marginLeft="1.0px" android:text="全部统计:" style="@style/main_budget_lable_hdpi" />
             </LinearLayout>
             <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="50.0px">
                 <TextView android:text="收入总额:" style="@style/main_money_label_hdpi" android:textColor = "@color/white" />

@@ -77,7 +77,7 @@ public class MainTallyBookActivity extends Activity implements OnClickListener, 
 		nav_statistics_tv = (TextView)findViewById(R.id.nav_statistics);
 		nav_statistics_tv.setOnClickListener(this);
 		
-//		loadMainInfo();//debug
+		loadMainInfo();
 	}
 
 	@Override

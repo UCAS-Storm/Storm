@@ -235,7 +235,7 @@ public class NavStatisticsActivity extends Activity implements OnClickListener{
 		
 		while (statIterator.hasNext()){
 			Map.Entry<String, Double> entry = statIterator.next();
-			mSeries.add(entry.getKey(), entry.getValue() / incomeSum);
+			mSeries.add(entry.getKey(), entry.getValue() / (type==1 ? incomeSum : payoutSum));
 			SimpleSeriesRenderer renderer = new SimpleSeriesRenderer();
 			if (cnt < COLORS.length) {
 				renderer.setColor(COLORS[cnt++]);// 设置描绘器的颜色
