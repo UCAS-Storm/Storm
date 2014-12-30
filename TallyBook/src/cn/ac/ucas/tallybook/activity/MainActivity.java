@@ -54,11 +54,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			} 
 			
 			int lgn = login(tenantID, password);
-			
-			//开发调试暂用*****
-//			int lgn = 1;
-			//************
-			
+						
 			if(lgn == 4) {
 				DialogUtil.showDialog(context, "没有购买服务或服务已到期！", false);
 			} else if(lgn == 5) {
