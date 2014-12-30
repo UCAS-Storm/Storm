@@ -17,9 +17,7 @@ drop table if exists Category;
 
 drop table if exists BuyService;
 
-drop table if exists Income;
-
-drop table if exists PayOut;
+drop table if exists Expense;
 
 /*==============================================================*/
 /* Table: Tenant	租户表(此处也只用户表)                				*/
@@ -72,31 +70,18 @@ create table BuyService
 );
 
 /*==============================================================*/
-/* Table: Income	        收入表                                */
+/* Table: Expense  花费表(收入或支出                            */
 /*==============================================================*/
-create table Income
+create table Expense
 (
-   IncomeID             int auto_increment not null,
+   ExpenseID            int auto_increment not null,
    TenantID            	varchar(20),
+   Type             		int,
    CategoryID           int,
    ExpenseTime    		  date,
    Money        		    double, 
    Note                 varchar(50),
-   primary key (IncomeID)
-);
-
-/*==============================================================*/
-/* Table: PayOut  支出                                          */
-/*==============================================================*/
-create table PayOut
-(
-   PayOutID             int auto_increment not null,
-   TenantID            	varchar(20),
-   CategoryID           int,
-   ExpenseTime    		  date,
-   Money        		    double, 
-   Note                 varchar(50),
-   primary key (PayOutID)
+   primary key (ExpenseID)
 );
 
 alter table BuyService add constraint FK_relationship_1 foreign key (TenantID)
@@ -105,16 +90,10 @@ alter table BuyService add constraint FK_relationship_1 foreign key (TenantID)
 alter table BuyService add constraint FK_relationship_2 foreign key (ServiceID)
       references Service (ServiceID) on delete restrict on update restrict;  
 
-alter table Income add constraint FK_relationship_3 foreign key (TenantID)
+alter table Expense add constraint FK_relationship_3 foreign key (TenantID)
       references Tenant (TenantID) on delete restrict on update restrict;
 
-alter table Income add constraint FK_relationship_4 foreign key (CategoryID)
-      references Category (CategoryID) on delete restrict on update restrict;
-
-alter table PayOut add constraint FK_relationship_5 foreign key (TenantID)
-      references Tenant (TenantID) on delete restrict on update restrict;
-
-alter table PayOut add constraint FK_relationship_6 foreign key (CategoryID)
+alter table Expense add constraint FK_relationship_4 foreign key (CategoryID)
       references Category (CategoryID) on delete restrict on update restrict;
       
 /*==============================================================*/

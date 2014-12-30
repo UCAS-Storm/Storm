@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+
+  <servlet>
+    <servlet-name>TenantServlet</servlet-name>
+    <servlet-class>cn.ac.ucas.tallybook.servlet.TenantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TenantServlet</servlet-name>
+    <url-pattern>/servlet/TenantServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>LoadInfoServlet</servlet-name>
+    <servlet-class>cn.ac.ucas.tallybook.servlet.LoadInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadInfoServlet</servlet-name>
+    <url-pattern>/servlet/LoadInfoServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SaveExpenseServlet</servlet-name>
+    <servlet-class>cn.ac.ucas.tallybook.servlet.SaveExpenseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SaveExpenseServlet</servlet-name>
+    <url-pattern>/servlet/SaveExpenseServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>LoadStatServlet</servlet-name>
+    <servlet-class>cn.ac.ucas.tallybook.servlet.LoadStatServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadStatServlet</servlet-name>
+    <url-pattern>/servlet/LoadStatServlet</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>LoadFlowServlet</servlet-name>
+    <servlet-class>cn.ac.ucas.tallybook.servlet.LoadFlowServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadFlowServlet</servlet-name>
+    <url-pattern>/servlet/LoadFlowServlet</url-pattern>
+  </servlet-mapping>
+</web-app>

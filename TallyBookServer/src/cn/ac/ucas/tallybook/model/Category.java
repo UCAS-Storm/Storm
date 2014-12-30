@@ -5,6 +5,8 @@ public class Category {
 	private int categoryID;
 	
 	private String categoryName;
+	
+	private double count;
 
 	public int getCategoryID() {
 		return categoryID;
@@ -20,5 +22,13 @@ public class Category {
 
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+
+	public double getCount() {
+		return count;
+	}
+
+	public void setCount(double count) {
+		this.count = count;
 	}
 }

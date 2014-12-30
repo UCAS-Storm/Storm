@@ -7,8 +7,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DB {
+	/* configure.properties */
+    private static String DB_PATH = null;//指向要访问的数据库名
+    private static String DB_USER = null;// MySQL配置时的用户名
+    private static String DB_PASSWD = null; // MySQL配置时的密码
 	
 		static {
+			Configuration config = new Configuration("configure.properties");
+			DB_PATH = config.getValue("DB_PATH");
+			DB_USER = config.getValue("DB_USER");
+			DB_PASSWD = config.getValue("DB_PASSWD");
+			
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 			} catch (ClassNotFoundException e) {
@@ -19,7 +28,7 @@ public class DB {
 		public static Connection getConnection() {
 			Connection conn = null;
 			try {
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TallyBook?user=root&password=root123");
+				conn = DriverManager.getConnection(DB_PATH, DB_USER, DB_PASSWD);
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -55,4 +64,3 @@ public class DB {
 			}
 		}
 }
-

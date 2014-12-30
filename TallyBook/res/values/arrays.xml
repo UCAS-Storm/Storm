@@ -9,7 +9,7 @@
         <item>提前五天</item>
     </string-array>
     <string-array name="setting_listview_item_operation">
-        <item>编辑</item>
+        <!--  <item>编辑</item>-->
         <item>删除</item>
     </string-array>
     <string-array name="budget_mode_type">

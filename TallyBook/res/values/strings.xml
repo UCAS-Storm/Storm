@@ -6,6 +6,7 @@
     <string name="login_label_password">密码</string>
     <string name="login_label_signin">登         录</string>
     <string name="login_register_link">没有账号？注册</string>
+    <string name="today_expense_two">今日最近两笔记录：</string>
     
 	<string name="hello">Hello World, Main!</string>
 	
@@ -15,6 +16,7 @@
 	<string name="exit_ok">确定</string>
 	<string name="exit_cancle">取消</string>
 	<string name="error_system_message">系统错误</string>
+	<string name="message_queren_system">确定要删除吗？</string>
 	
     <string name="haha">mymoney</string>
     <string name="app_name">Storm记账</string>
